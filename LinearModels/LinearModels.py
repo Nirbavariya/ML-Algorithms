@@ -44,7 +44,7 @@ class GradientDescent:
     
     def get_l1_l2_w(self):
         a, b = 0, 0
-        for i in list(self.theta.squeeze()):
+        for i in list(self.theta.squeeze())[:-1]: # bias term (intercept) is not regularized
             a += i 
             b += i ** 2
         
@@ -160,14 +160,20 @@ class LogisticRegression:
                  "db": db}
 
         return params, grads, costs
-
-    def predict(self, X):
-
+    
+    
+    def predict_proba(self, X):
         m = X.shape[1]
         Y_prediction = np.zeros((1,m))
         self.w = self.w.reshape(X.shape[0], 1)
 
         A = self.σ(np.dot(self.w.T, X) + self.b)
+        return A
+
+
+    def predict(self, X):
+
+        A = self.predict_proba(X)
 
         for i in range(A.shape[1]):
 
