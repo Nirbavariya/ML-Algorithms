@@ -31,7 +31,7 @@ class linear_regression_svd:
         return self.test.dot(self.theta) 
 
 
-# iterative method, gradually approaches the solution
+    
 # iterative method, gradually approaches the solution
 class GradientDescent:
     
@@ -179,9 +179,9 @@ class LogisticRegression:
 
             Y_prediction[0, i] = 1 if A[0, i] >= 0.5 else 0
 
-        assert(Y_prediction.shape == (1, m))
+        
 
-        return Y_prediction
+        return Y_prediction.squeeze()
     
     def fit(self, X, y, num_iterations = 2000, learning_rate = 0.5):
         w, b = self.initialize_with_zeros(X.shape[0])
